@@ -91,3 +91,67 @@ const removeDuplicates = (nums) => {
   }
   return nums.length;
 };
+
+// plusOne
+// You are given a large integer represented as an integer array digits, where each digits[i] is the ith digit of the integer.
+// The digits are ordered from most significant to least significant in left-to-right order.
+// The large integer does not contain any leading 0's.
+// Increment the large integer by one and return the resulting array of digits.
+// Input: digits = [1,2,3]
+// Output: [1,2,4]
+// Input: digits = [4,3,2,1]
+// Output: [4,3,2,2]
+// Input: digits = [9]
+// Output: [1,0]
+const plusOne = (digits) => {
+  for (let i = digits.length - 1; i >= 0; i--) {
+    if (digits[i] === 9) {
+      digits[i] = 0;
+      if (i === 0) {
+        return [1, ...digits];
+      }
+    } else {
+      digits[i]++;
+      break;
+    }
+  }
+  return digits;
+};
+
+// Given two integer arrays nums1 and nums2, return an array of their intersection.
+// Each element in the result must appear as many times as it shows in both arrays
+// and you may return the result in any order.
+// TODO
+
+// Given an integer array nums,
+// rotate the array to the right by k steps, where k is non-negative.
+// Input: nums = [1,2,3,4,5,6,7], k = 3
+// Output: [5,6,7,1,2,3,4]
+// Explanation:
+// rotate 1 steps to the right: [7,1,2,3,4,5,6]
+// rotate 2 steps to the right: [6,7,1,2,3,4,5]
+// rotate 3 steps to the right: [5,6,7,1,2,3,4]
+const rotate = (nums, k = 0) => {
+  const steps = k % nums.length;
+  const tail = nums.splice(nums.length - steps, steps);
+  nums.unshift(...tail);
+};
+
+// You are given an n x n 2D matrix representing an image, rotate the image by 90 degrees (clockwise).
+// You have to rotate the image in-place, which means you have to modify the input 2D matrix directly.
+// DO NOT allocate another 2D matrix and do the rotation.
+const rotateMatrix = (matrix) => {
+  const size = matrix.length;
+  for (let r = size - 1; r >= 0; r--) {
+    const tail = matrix[r];
+    for (let c = 0; c <= size - 1; c++) {
+      matrix[c].push(tail[c]);
+    }
+  }
+
+  for (let r = size - 1; r >= 0; r--) {
+    for (let c = 0; c <= size - 1; c++) {
+      matrix[c].shift();
+    }
+  }
+};
